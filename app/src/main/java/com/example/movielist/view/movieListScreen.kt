@@ -1,6 +1,6 @@
 package com.example.movielist.view
 
-import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
@@ -13,6 +13,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun MovieListScreen(){
@@ -21,9 +22,14 @@ fun MovieListScreen(){
 
     Column {
         Box(modifier = Modifier.weight(0.9f)){
-            LazyColumn{
+            LazyColumn(){
                 itemsIndexed(movies){ _, item ->
                     Text(text = item.title)
+                    Image(
+                        modifier = Modifier.size(128.dp),
+                        painter = rememberAsyncImagePainter(model = "https://image.tmdb.org/t/p/original${item.posterPath}") ,
+                        contentDescription = null
+                    )
                 }
 
             }
