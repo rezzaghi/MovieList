@@ -8,6 +8,10 @@ class MovieRepositoryImpl: MovieRepository {
     private val retrofit = MovieApi().getRetrofitInstance()
     private val endpoint = retrofit.create(MovieService::class.java)
     override fun getMoviesData() = flow {
-        emit(endpoint.getMovieList())
+        page += 1
+        emit(endpoint.getMovieList(page = page))
+    }
+    companion object{
+        var page = 0
     }
 }
